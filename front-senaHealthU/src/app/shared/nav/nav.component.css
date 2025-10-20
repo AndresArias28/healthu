@@ -1,0 +1,10 @@
+/* Eliminar estilos innecesarios y asegurar responsividad del nav */
+.navbar {
+  padding: 10px 20px;
+}
+
+@media (max-width: 991.98px) {
+  .navbar {
+    padding: 10px 8px;
+  }
+}

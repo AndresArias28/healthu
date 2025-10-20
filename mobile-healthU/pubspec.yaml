@@ -1,0 +1,78 @@
+name: healthu
+description: "A new Flutter project."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Escaneo de QR
+  mobile_scanner: ^3.0.0
+  camera: ^0.10.0+4
+  permission_handler: ^12.0.1
+
+  # Networking
+  dio: ^5.4.0
+  http: ^1.1.0
+  http_parser: ^4.0.0
+
+  # Persistencia
+  shared_preferences: ^2.2.2
+  jwt_decoder: ^2.0.1
+
+  # UI & estilos
+  google_fonts: ^5.0.0
+  font_awesome_flutter: ^10.7.0
+  cached_network_image: ^3.3.0
+  lottie: ^3.3.1
+  image_picker: ^1.0.4
+
+  # Internacionalización
+  intl: 0.19.0
+
+  # Gráficas
+  fl_chart: ^1.1.1
+
+  # Medición BPM (frecuencia cardíaca)
+  heart_bpm: ^2.0.0
+
+  # Calendario
+  table_calendar: ^3.1.2
+
+  awesome_dialog: ^3.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+  # Ícono de la aplicación
+  flutter_launcher_icons: ^0.13.1
+
+dependency_overrides:
+  vector_math: ^2.2.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/full.png
+    - assets/images/pecho.png
+    - assets/images/musculos.png
+    - assets/images/healthu_logo.png
+    - assets/images/badge.png
+    - assets/animations/
+
+# Configuración del ícono de la app
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/healthu_logo.png"

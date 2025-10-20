@@ -1,0 +1,65 @@
+/* ===== Sidebar principal ===== */
+.sidebar {
+  background: #d2e7d0;
+  min-height: calc(100vh - 90px);
+  width: 260px;
+  transition: all 0.3s ease;
+  border-right: 1px solid #dee2e6;
+  position: fixed;
+  top: 90px;
+  left: 0;
+  z-index: 1040;
+}
+
+/* Modo colapsado */
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar.collapsed .nav-link span,
+.sidebar.collapsed h6,
+.sidebar.collapsed p {
+  display: none;
+}
+
+/* Nav links */
+.nav-link {
+  color: #343a40;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition: all 0.25s ease-in-out;
+}
+
+.nav-link i {
+  font-size: 1.2rem;
+}
+
+.nav-link:hover {
+  background-color: #e9f7ef;
+  color: #198754;
+  transform: translateX(3px);
+}
+
+.nav-link.active {
+  background-color: #198754;
+  color: white !important;
+  box-shadow: 0 2px 6px rgba(25, 135, 84, 0.3);
+}
+
+/* Footer */
+.sidebar-footer {
+  border-top: 1px solid #eaeaea;
+  text-align: center;
+  font-size: 0.85rem;
+  padding: 0.75rem;
+  color: #777;
+}
+
+/* Sombra y suavidad */
+.shadow-sm {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+

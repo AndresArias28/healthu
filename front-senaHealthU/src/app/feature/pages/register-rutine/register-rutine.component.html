@@ -1,0 +1,264 @@
+<div class="bg-register-rutine">
+  <div class="register-content container-fluid py-5">
+    <div class="container-fluid bg-register-rutine py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+          <div class="card border-0 shadow-lg rounded-4">
+            <div class="card-body p-5">
+              <!-- Encabezado -->
+              <div class="text-center mb-4">
+                <div class="mb-3">
+                  <i
+                    class="bi bi-clipboard-plus text-success"
+                    style="font-size: 3rem"
+                  ></i>
+                </div>
+                <h1 class="fw-bold mb-1 text-success">Crear Rutina</h1>
+                <p class="text-muted mb-0">
+                  Selecciona ejercicios, define el enfoque y ajusta los
+                  parámetros de entrenamiento.
+                </p>
+              </div>
+
+              <!-- Formulario -->
+              <form
+                *ngIf="formularioRutina"
+                [formGroup]="formularioRutina"
+                (ngSubmit)="registerRutine()"
+                enctype="multipart/form-data"
+                class="mt-4"
+              >
+                <!-- Nombre -->
+                <div class="mb-4">
+                  <label class="form-label fw-semibold"
+                    >Nombre de la rutina</label
+                  >
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text bg-success text-white">
+                      <i class="bi bi-pencil-square"></i>
+                    </span>
+                    <input
+                      formControlName="nombre"
+                      type="text"
+                      class="form-control"
+                      placeholder="Ej: Rutina de cuerpo completo"
+                    />
+                  </div>
+                </div>
+
+                <!-- Descripción -->
+                <div class="mb-4">
+                  <label class="form-label fw-semibold">Descripción</label>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text bg-success text-white">
+                      <i class="bi bi-file-earmark-text"></i>
+                    </span>
+                    <textarea
+                      formControlName="descripcion"
+                      rows="2"
+                      class="form-control"
+                      placeholder="Describe brevemente los objetivos de esta rutina..."
+                    ></textarea>
+                  </div>
+                </div>
+
+                <!-- Imagen -->
+                <div class="mb-4">
+                  <label class="form-label fw-semibold"
+                    >Foto de la rutina</label
+                  >
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text bg-success text-white">
+                      <i class="bi bi-image"></i>
+                    </span>
+                    <input
+                      formControlName="fotoRutina"
+                      type="file"
+                      class="form-control"
+                      accept="image/*"
+                      (change)="onFileSelected($event)"
+                    />
+                  </div>
+
+                  <div *ngIf="previewUrl" class="text-center mt-3">
+                    <img
+                      [src]="previewUrl"
+                      alt="Vista previa"
+                      class="img-fluid rounded shadow-sm"
+                      style="max-height: 180px"
+                    />
+                  </div>
+                </div>
+
+                <!-- Enfoque y Dificultad -->
+                <div class="row g-3 mb-4">
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Enfoque</label>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text bg-success text-white">
+                        <i class="bi bi-bullseye"></i>
+                      </span>
+                      <select formControlName="enfoque" class="form-select">
+                        <option value="TREN_SUPERIOR">Tren Superior</option>
+                        <option value="TREN_INFERIOR">Tren Inferior</option>
+                        <option value="FULL_BODY">Cuerpo Completo</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Dificultad</label>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text bg-success text-white">
+                        <i class="bi bi-lightning-charge"></i>
+                      </span>
+                      <select formControlName="dificultad" class="form-select">
+                        <option value="Principiante">Principiante</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Avanzado">Avanzado</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cantidad de ejercicios -->
+                <div class="mb-4">
+                  <label class="form-label fw-semibold"
+                    >Cantidad de ejercicios</label
+                  >
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text bg-success text-white">
+                      <i class="bi bi-list-ol"></i>
+                    </span>
+                    <select
+                      formControlName="cantidadEjercicios"
+                      class="form-select"
+                      (change)="onCantidadChange($event)"
+                    >
+                      <option *ngFor="let num of [1, 2, 3, 4, 5]" [value]="num">
+                        {{ num }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Ejercicios dinámicos -->
+                <div formArrayName="ejercicios" class="mt-4">
+                  <h4 class="text-success mb-3">
+                    <i class="bi bi-collection me-2"></i> Ejercicios de la
+                    rutina
+                  </h4>
+
+                  <div
+                    *ngFor="
+                      let grupo of ejerciciosFormArray.controls;
+                      let i = index
+                    "
+                    [formGroupName]="i"
+                    class="p-4 mb-4 bg-white border rounded-4 shadow-sm"
+                  >
+                    <h5 class="fw-semibold mb-3 text-success">
+                      <i class="bi bi-person-workspace me-2"></i> Ejercicio
+                      {{ i + 1 }}
+                    </h5>
+
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label class="form-label">Seleccionar ejercicio</label>
+                        <select
+                          formControlName="idEjercicio"
+                          class="form-select form-select-lg"
+                        >
+                          <option value="">-- Selecciona --</option>
+                          <option
+                            *ngFor="let ejercicio of ejercicios"
+                            [value]="ejercicio.idEjercicio"
+                          >
+                            {{ ejercicio.nombreEjercicio }}
+                          </option>
+                        </select>
+                      </div>
+
+                      <div class="col-md-3">
+                        <label class="form-label">Series</label>
+                        <input
+                          formControlName="series"
+                          type="number"
+                          class="form-control form-control-lg"
+                        />
+                      </div>
+
+                      <div class="col-md-3">
+                        <label class="form-label">Repeticiones</label>
+                        <input
+                          formControlName="repeticion"
+                          type="number"
+                          class="form-control form-control-lg"
+                        />
+                      </div>
+
+                      <div class="col-md-6">
+                        <label class="form-label">Carga (Kg)</label>
+                        <input
+                          formControlName="carga"
+                          type="number"
+                          class="form-control form-control-lg"
+                        />
+                      </div>
+
+                      <div class="col-md-6">
+                        <label class="form-label">Duración (Segundos)</label>
+                        <input
+                          formControlName="duracion"
+                          type="number"
+                          class="form-control form-control-lg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Error -->
+                <div
+                  *ngIf="ejerciciosFormArray.errors?.['ejerciciosDuplicados']"
+                  class="text-danger mt-2 fw-semibold text-center"
+                >
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                  No puedes seleccionar el mismo ejercicio más de una vez.
+                </div>
+
+                <!-- Botones -->
+                <div
+                  class="mt-5 d-flex flex-wrap gap-3 justify-content-between"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-success btn-lg flex-fill"
+                  >
+                    <i class="bi bi-check-circle me-2"></i> Crear Rutina
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-lg flex-fill"
+                    (click)="volverDashboard()"
+                  >
+                    <i class="bi bi-arrow-left-circle me-2"></i> Volver al
+                    Dashboard
+                  </button>
+                </div>
+              </form>
+
+              <!-- Mensaje de éxito -->
+              <div
+                *ngIf="mensajeExito"
+                class="alert alert-success mt-4 text-center fw-semibold rounded-pill shadow-sm"
+              >
+                <i class="bi bi-check-circle-fill me-2"></i>{{ mensajeExito }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

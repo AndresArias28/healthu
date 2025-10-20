@@ -1,0 +1,90 @@
+.about-us-container {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.94),
+      rgba(255, 255, 255, 0.94)
+    ),
+    url('../../../../assets/sena-team.png') center/cover no-repeat;
+  padding: 120px 0 80px;
+  min-height: 100vh;
+}
+
+.about-us-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  color: #222;
+}
+
+.about-us-content h1 {
+  color: #1f4524;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+.about-us-content .mission {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  max-width: 750px;
+}
+
+.values-container {
+  margin-top: 60px;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.value-item {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #eaeaea;
+}
+
+.value-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.value-item h3 {
+  color: #1f4524;
+  margin-top: 15px;
+  font-size: 1.25rem;
+}
+
+.value-item p {
+  color: #555;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+.icon-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta {
+  font-size: 1.15rem;
+  color: #333;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.cta a {
+  color: #39a900;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}

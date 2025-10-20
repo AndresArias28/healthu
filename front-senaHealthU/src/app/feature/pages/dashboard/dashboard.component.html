@@ -1,0 +1,85 @@
+<div class="dashboard-container container-fluid">
+  <div class="row flex-nowrap min-vh-100">
+    
+    <!-- Sidebar -->
+    <aside class="col-auto d-none d-md-block sidebar shadow-sm">
+      <app-sidebar
+        [seccionActual]="seccionActual"
+        [tipoUsuario]="'administrador'"
+        (seccionSeleccionada)="cambiarSeccion($event)">
+      </app-sidebar>
+    </aside>
+
+    <!-- Sidebar offcanvas (móvil) -->
+    <div class="d-md-none">
+      <button class="btn btn-success m-3" type="button" data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+        <i class="bi bi-list"></i> Menú
+      </button>
+
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar">
+        <div class="offcanvas-header">
+          <h5 id="offcanvasSidebarLabel">Menú</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+          <app-sidebar
+            [seccionActual]="seccionActual"
+            [tipoUsuario]="'administrador'"
+            (seccionSeleccionada)="cambiarSeccion($event)">
+          </app-sidebar>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="col bg-body-tertiary">
+      <div class="contenido">
+        <header class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+          <span class="badge bg-success-subtle text-success fw-medium">HealtU</span>
+        </header>
+
+        <!-- Secciones dinámicas -->
+        <ng-container [ngSwitch]="seccionActual">
+          <app-dashboard-graphics *ngSwitchCase="'gestionUsers'" [tipoUsuario]="'administrador'"></app-dashboard-graphics>
+          <app-dashboard-admin *ngSwitchCase="'panelAdmin'" [tipoUsuario]="'administrador'"></app-dashboard-admin>
+          <app-dashboard-exercises *ngSwitchCase="'gestionEjercicios'" [tipoUsuario]="'administrador'"></app-dashboard-exercises>
+          <app-programador *ngSwitchCase="'qr'"></app-programador>
+          <app-gestionar-asignacion *ngSwitchCase="'asignarRutina'"></app-gestionar-asignacion>
+          <app-register-rutine *ngSwitchCase="'registrarRutina'" (rutinaRegistrada)="redirigirAGestionUsuarios()"></app-register-rutine>
+   <div *ngSwitchDefault class="text-center py-5 bg-white rounded-4 shadow-sm">
+  <div class="p-4">
+    <!-- Encabezado -->
+    <h2 class="fw-bold text-success mb-2">¡Bienvenido a HealthU, Instructor! 👋</h2>
+    <p class="text-muted lead mb-4">
+      Gestiona <span class="fw-semibold text-success">rutinas</span>, supervisa <span class="fw-semibold text-success">ejercicios</span> 
+      y acompaña a tus aprendices en su camino hacia hábitos más saludables. 💪
+    </p>
+
+    <!-- Imagen decorativa -->
+    <div class="d-flex justify-content-center">
+      <img
+        src="../../../../assets/images.png"
+        alt="Panel de instructor"
+        class="img-fluid rounded-4 shadow-sm"
+        style="max-width: 480px; object-fit: cover;"
+      />
+    </div>
+
+    <!-- Mensaje final -->
+    <div class="mt-4">
+      <p class="text-secondary mb-1">
+        Recuerda que puedes acceder a todas las funciones desde el menú lateral. 
+      </p>
+      <p class="text-muted small">
+        Si necesitas ayuda, contacta al equipo de soporte o revisa la sección de configuración.
+      </p>
+    </div>
+  </div>
+</div>
+
+        </ng-container>
+      </div>
+    </main>
+  </div>
+</div>
